@@ -58,7 +58,17 @@ jun : -----
 ```
 
 **비멱등성, 입력이 같아도 항상 결과가 다름**
+
 ## 기능 
+
+입력 - cars: String => Array, chance: String => Number 
+1. 입력 유효성 검증
+2. 처음에 cars 를 받으면 split(",") 으로 배열화
+3. new Map(), carName => distance 형식으로 정리 (라운드 마다 키와 밸류를 출력. 이 때, 출력 양식 템플릿 함수 있으면 좋을듯)
+4. Map 을 순회. 무작위 값 호출 후 4 이상이면 distance++
+5. chance 를 모두 소모 하면 종료. Map 을 value 내림차로 정렬 후 [0][1]과 값이 같으면 우승자 목록에 [i][0] 추가함, 아닐시 break
+
+출력은 라운드 실행 결과와 최종 결과로 나뉨
 
 ## 설계 
 Utility Functions (최하위) => Domain Layer => Service Layer => App(최상위)
