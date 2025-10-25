@@ -88,7 +88,6 @@ jun : -----
 - 자동차 이름 공백일 경우 에러 반환
 - 자동차 이름 앞뒤 공백은 넘어가줌. trim()
 - cars와 chance의 범위는 추후 생각
-- 
 
 ## 설계 
 Utility Functions (최하위) => Domain Layer => Service Layer => App(최상위)
@@ -100,5 +99,26 @@ Utility Functions (최하위) => Domain Layer => Service Layer => App(최상위)
 4. 함수 호출
 5. 결과
 
-함수형 패러다임. 간단함 작은 규모의 서비스에 적합함 js 표준         
-멀티 패러다임. 파일 규모가 방대해짐 내 포텐을 보여줄 수 있음 
+### 클래스와 함수
+
+자동차 상태관리 해야하기 떄문에 기본적으로 객체지향
+- App: 입출력
+- Car: 자동차 상태
+- Race: 행동
+
+검증은 상태관리를 하지않고 예외만 던지는 순수함수로 작성
+검증 함수는 각각의 인수를 검증할 두개의 함수로 나뉜다.
+- validateCars: 인수 cars의 유효성을 검증
+- validateRounds: 인수 rounds의 유효성을 검증
+- validateInputs: 래퍼, 상황보고 결정
+
+**App**
+- 초기에 검증 함수로 유효성 검증한 뒤, Car 에 전달
+
+**Car**
+- App 에게 전달받은 인수로 상태 초기화(cars 문자에서 배열로 전환, rounds 문자에서 숫자로 전환)
+
+**Race**
+- Car 에게 전달받은 인수로 상태 초기화 
+
+
