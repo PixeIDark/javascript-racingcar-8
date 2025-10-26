@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import {MissionUtils} from "@woowacourse/mission-utils";
 import {OUTPUT_MESSAGES} from "../constants/outputMessages.js";
 
 const printEmptyLine = () => {
@@ -14,7 +14,7 @@ export const printRaceRound = (formattedRound) => {
 };
 
 export const printRaceResult = (winnersString, dashRaceHistory) => {
-  MissionUtils.Console.print(OUTPUT_MESSAGES.RACE_RESULT());
+  MissionUtils.Console.print(OUTPUT_MESSAGES.RACE_RESULT);
 
   dashRaceHistory.forEach(printRaceRound);
 
