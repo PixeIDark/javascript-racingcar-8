@@ -1,6 +1,6 @@
-// __tests__/ui/output.test.js
-import { printRaceRound, printRaceResult } from "../../src/ui/output.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import {printRaceResult, printRaceRound} from "../../src/ui/output.js";
+import {MissionUtils} from "@woowacourse/mission-utils";
+import {OUTPUT_MESSAGES} from "../../src/constants/outputMessages.js";
 
 jest.mock("@woowacourse/mission-utils");
 
@@ -12,7 +12,7 @@ describe("printRaceRound", () => {
   test("포맷된 라운드의 각 자동차와 거리를 출력한다", () => {
     const formattedRound = [
       ["pobi", "---"],
-      ["woni", "--"]
+      ["woni", "--"],
     ];
 
     printRaceRound(formattedRound);
@@ -34,7 +34,7 @@ describe("printRaceRound", () => {
     const formattedRound = [
       ["pobi", "----"],
       ["woni", "---"],
-      ["jun", "----"]
+      ["jun", "----"],
     ];
 
     printRaceRound(formattedRound);
@@ -62,7 +62,7 @@ describe("printRaceResult", () => {
   test("실행 결과 헤더를 출력한다", () => {
     const winnersString = "pobi";
     const dashRaceHistory = [
-      [["pobi", "-"], ["woni", ""]]
+      [["pobi", "-"], ["woni", ""]],
     ];
 
     printRaceResult(winnersString, dashRaceHistory);
@@ -70,8 +70,8 @@ describe("printRaceResult", () => {
     const calls = MissionUtils.Console.print.mock.calls;
     expect(calls).toEqual(
       expect.arrayContaining([
-        expect.arrayContaining(["실행 결과"])
-      ])
+        expect.arrayContaining([OUTPUT_MESSAGES.RACE_RESULT]),
+      ]),
     );
   });
 
@@ -79,7 +79,7 @@ describe("printRaceResult", () => {
     const winnersString = "pobi";
     const dashRaceHistory = [
       [["pobi", "-"], ["woni", ""]],
-      [["pobi", "--"], ["woni", "-"]]
+      [["pobi", "--"], ["woni", "-"]],
     ];
 
     printRaceResult(winnersString, dashRaceHistory);
@@ -89,35 +89,35 @@ describe("printRaceResult", () => {
       expect.arrayContaining([
         expect.arrayContaining(["pobi : -"]),
         expect.arrayContaining(["woni : "]),
-        expect.arrayContaining(["pobi : --"])
-      ])
+        expect.arrayContaining(["pobi : --"]),
+      ]),
     );
   });
 
   test("최종 우승자를 출력한다", () => {
     const winnersString = "pobi";
     const dashRaceHistory = [
-      [["pobi", "-"], ["woni", ""]]
+      [["pobi", "-"], ["woni", ""]],
     ];
 
     printRaceResult(winnersString, dashRaceHistory);
 
     const calls = MissionUtils.Console.print.mock.calls;
     const lastCall = calls[calls.length - 1][0];
-    expect(lastCall).toBe("최종 우승자 : pobi");
+    expect(lastCall).toBe(OUTPUT_MESSAGES.WINNER("pobi"));
   });
 
   test("공동 우승자를 출력한다", () => {
     const winnersString = "pobi, jun";
     const dashRaceHistory = [
-      [["pobi", "-"], ["jun", "-"], ["woni", ""]]
+      [["pobi", "-"], ["jun", "-"], ["woni", ""]],
     ];
 
     printRaceResult(winnersString, dashRaceHistory);
 
     const calls = MissionUtils.Console.print.mock.calls;
     const lastCall = calls[calls.length - 1][0];
-    expect(lastCall).toBe("최종 우승자 : pobi, jun");
+    expect(lastCall).toBe(OUTPUT_MESSAGES.WINNER("pobi, jun"));
   });
 
   test("여러 라운드를 모두 출력한다", () => {
@@ -125,7 +125,7 @@ describe("printRaceResult", () => {
     const dashRaceHistory = [
       [["pobi", "-"], ["woni", ""]],
       [["pobi", "--"], ["woni", "-"]],
-      [["pobi", "---"], ["woni", "--"]]
+      [["pobi", "---"], ["woni", "--"]],
     ];
 
     printRaceResult(winnersString, dashRaceHistory);
